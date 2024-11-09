@@ -17,7 +17,7 @@ public abstract class BaseWeapon : MonoBehaviour, IWeapon
     {
         if (!canAttack) return;
 
-        StartCoroutine(AttackCooldown());
+        //StartCoroutine(AttackCooldown());
         PlayWeaponEffect();
     }
 
@@ -28,6 +28,7 @@ public abstract class BaseWeapon : MonoBehaviour, IWeapon
 
     public virtual void OnUnequip()
     {
+        canAttack = true;
         gameObject.SetActive(false);
     }
 
@@ -44,5 +45,10 @@ public abstract class BaseWeapon : MonoBehaviour, IWeapon
         canAttack = false;
         yield return new WaitForSeconds(cooldown);
         canAttack = true;
+    }
+
+    public bool CanAttack()
+    {
+        return canAttack;
     }
 }
